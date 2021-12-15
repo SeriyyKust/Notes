@@ -1,8 +1,6 @@
 from classnotes import Note
-import time
 import os
 import pickle
-import config
 
 
 class Notes:
@@ -38,6 +36,8 @@ class Notes:
             return False
         else:
             self.list_notes[index], self.list_notes[self.count_notes - 1] = self.list_notes[self.count_notes - 1], self.list_notes[index]
+            name_tmp = self.list_notes[index].get_name()
+            self.list_index[name_tmp] = index
             n = self.list_notes.pop()
             self.count_notes -= 1
             self.list_index.pop(name)
@@ -53,6 +53,25 @@ class Notes:
             list_name.append(element.get_name())
         return list_name
 
+    def get_deadline_time(self, name):
+        index = self.list_index.get(name)
+        if index is None:
+            return None
+        return self.list_notes[index].deadline_time_to_string()
+
+    def get_start_time(self, name):
+        index = self.list_index.get(name)
+        if index is None:
+            return None
+        return self.list_notes[index].start_time_to_string()
+
+    def get_is_important(self, name):
+        index = self.list_index.get(name)
+        if index is None:
+            return None
+        return self.list_notes[index].get_is_important()
+
+    # this will be delete
     def get_info_string(self, name):
         index = self.list_index.get(name)
         if index is None:

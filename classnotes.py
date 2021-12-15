@@ -77,7 +77,7 @@ class Note:
 
     def start_time_to_string(self):
         struct_t = time.gmtime(self.start_time)
-        return_string = str(struct_t.tm_mday) + ' ' + str(struct_t.tm_mon) + ' ' + str(struct_t.tm_year) + \
+        return_string = str(struct_t.tm_mday) + '.' + str(struct_t.tm_mon) + '.' + str(struct_t.tm_year) + \
             str(' ') + str((struct_t.tm_hour + 3) % 24) + ':' + str(struct_t.tm_min) + ':' + str(struct_t.tm_sec)
         return return_string
 
@@ -85,12 +85,12 @@ class Note:
         if self.dead_line is None:
             return 'None'
         struct_t = time.gmtime(self.dead_line)
-        return_string = str(struct_t.tm_mday) + ' ' + str(struct_t.tm_mon) + ' ' + str(struct_t.tm_year) + \
+        return_string = str(struct_t.tm_mday) + '.' + str(struct_t.tm_mon) + '.' + str(struct_t.tm_year) + \
             str(' ') + str((struct_t.tm_hour + 3) % 24) + ':' + str(struct_t.tm_min) + ':' + str(struct_t.tm_sec)
         return return_string
 
     def __str__(self):
-        return_string = self.short_name  + '\n' + \
+        return_string = self.short_name + '\n' + \
             'start: ' + self.start_time_to_string() + '\n' + \
             'deadline: ' + self.deadline_time_to_string() + '\n'
         if self.base_info is not None:
