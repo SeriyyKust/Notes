@@ -44,6 +44,16 @@ class Notes:
             n.__del__()
             return True
 
+    def change_base_info(self, name, new_info):
+        index = self.list_index.get(name)
+        if index is None:
+            return False
+        else:
+            if new_info == '':
+                new_info = None
+            self.list_notes[index].change(name, new_info)
+            return True
+
     def get_count(self):
         return self.count_notes
 
@@ -71,13 +81,12 @@ class Notes:
             return None
         return self.list_notes[index].get_is_important()
 
-    # this will be delete
     def get_info_string(self, name):
         index = self.list_index.get(name)
         if index is None:
-            return 'None'
+            return None
         else:
-            return str(self.list_notes[index])
+            return self.list_notes[index].get_base_info()
 
     def load(self):
         with open(self.path_to_file,'wb') as file:
